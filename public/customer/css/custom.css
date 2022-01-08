@@ -1,0 +1,20 @@
+.set-color{
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
+    height: 2em;
+    width: 2em;
+    border: 1px solid black;
+    border-radius: 2px;
+    /* background-color: blue; */
+}
+.not-available {
+    text-align: center;
+    line-height: 2em;
+}
+
+.not-available:before {
+    font-family: fontawesome;
+    content: "\f00c";
+    color: red;
+}
