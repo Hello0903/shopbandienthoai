@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="titlepage">
-                        <h2>Our Brand</h2>
+                        <h2>Các sản phẩm chính</h2>
                     </div>
                 </div>
             </div>
@@ -18,14 +18,14 @@
                      @foreach ($data as $item)
                         <div class="col-3" style="with:20%">
                             <div class="card p-3">
-                                <div class="text-center" data-id="{{$item['id']}}"> <img
+                                <div class="text-center idpro" data-id="{{$item['id']}}"> <img
                                         src="{{$item['anh']}}" style="width: 100%; height:16em"> </div>
-                                <div class="product-details"> <span class="font-weight-bold d-block">${{$item['giatien']}}</span>
+                                <div class="product-details"> <span class="font-weight-bold d-block">{{number_format( $item['giatien'])}} VND</span>
                                     <span>{{$item['ten']}}</span>
                                     <div class="buttons d-flex flex-row">
                                         <div class="cart"><i class="fa fa-shopping-cart"></i></div>
                                         <button data-id="{{$item['id']}}" class="btn btn-success cart-button btn-block" data-toggle="modal" data-target="#myModal"><span
-                                                class="dot">1</span>Buy now </button>
+                                                class="dot">1</span>Đặt mua </button>
                                     </div>
                                     {{-- <div class="weight"> <small>1 piece 2.5kg</small> </div> --}}
                                 </div> 
@@ -36,9 +36,9 @@
                 </div>
             </div>
 
-            <div class="col-md-12">
+            {{-- <div class="col-md-12">
                 <a class="read-more">See More</a>
-            </div>
+            </div> --}}
 
         </div>
         <script>
@@ -54,6 +54,7 @@
           console.log(data['product']); // show response from the php script.
         // show html in modal
         $('.modal-title').html("Mua sản phẩm: "+ data['product']['ten']);
+            var id_pro = data['product']['id']
             var anh = data['color'][0]['anh'];
             console.log(anh);
             $(".modal-img").attr('src',anh);
@@ -85,7 +86,7 @@
                             sub = "";
             }
             $('.memorys').html(memorys);
-
+            $('#id_product').val(id_pro);
             $('.set-color').click(function(){
                 //  alert($(this).data('id'));
                 $('.modal-img').attr('src',$(this).data('id'));

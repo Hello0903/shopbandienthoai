@@ -31,6 +31,7 @@
                     </div>
                     <div class="details col-md-6">
                         <h3 class="product-title">{{ $product->ten }}</h3>
+                        <input type="hidden" id="id-products" value="{{$product->id}}">
                         {{-- <div class="rating">
                             <div class="stars"> <span class="fa fa-star checked"></span> <span
                                     class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span
@@ -38,15 +39,17 @@
                             </div> <span class="review-no">123 đánh giá</span>
                         </div> --}}
                         <p class="product-description">{{$product->thongso}}</p>
-                        <h4 class="price" data-id="{{ $memory[0]->giatien }}">Giá tiền: {{ $memory[0]->giatien }}</h4>
+                        <h4 class="price" data-id="{{ $memory[0]->giatien }}">Giá tiền: {{number_format($memory[0]->giatien) }}</h4>
                         {{-- <p class="vote"><strong>91%</strong> of người mua hài lòng với sản phẩm này <strong>(87
                                 bình chọn)</strong>
                         </p> --}}
                         <h5 class="sizes">Dung lượng:
                             <?php $j = 0?>
                             @foreach ($memory as $item)
-                                <span class="size <?php if($j==0) echo "bg-secondary text-white"; $j++?>" data-toggle="tooltip"
-                                    title="small" style="border: 1px solid black" data-id="{{ $item->giatien }}">{{ $item->dungluong }}G</span>
+                                <span class="size <?php if($j==0) {echo "bg-secondary text-white default-memory"; 
+                                    }$j++?>" data-toggle="tooltip"
+                                    title="small" style="border: 1px solid black" data-memory="{{ $item->dungluong}}"
+                                    data-id="{{ $item->giatien }}">{{ $item->dungluong }}G</span>
                             @endforeach
                             {{-- <span class="size" data-toggle="tooltip"
                                 title="medium">m</span> <span class="size" data-toggle="tooltip"
@@ -57,18 +60,18 @@
                             <?php $i = 0 ?>
                             @foreach ($color as $item)
                                 </span> <span class="{{ $item->id_mau }}
-                                    <?php if($i == 0) echo "not-available"; $i++?>
+                                    <?php if($i == 0) echo "not-available defautl-color"; $i++?>
                                      set-color" data-toggle="tooltip"
-                                    style="border: 1px solid black" data-id='{{$item->anh}}'>
+                                    style="border: 1px solid black" data-id='{{$item->anh}}' data-mau='{{$item->id_mau}}'>
                             @endforeach
                             {{-- <span class="color orange not-available" data-toggle="tooltip"
                                 title="Not In store"></span> <span class="color green"></span> <span
                                 class="color blue"></span> --}}
                         </h5>
-                        <div class="action"> <a href="#" target="_blank"> <button
-                                    class="add-to-cart btn btn-default" type="button">MUA NGAY</button> </a> <a href="#"
+                        <div class="action">  <button
+                                    class="add-to-cart btn btn-default" type="button" data-toggle="modal" data-target="#myModal">MUA NGAY</button> </a> <a href="#"
                                 target="_blank"> <button class="like btn btn-default" type="button"><span
-                                        class="fa fa-heart"></span></button> </a>
+                                        class="fa fa-heart"></span></button>
                         </div>
                     </div>
                 </div>
@@ -308,19 +311,47 @@
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
+        var gcolor = "";
+        var gmemory = "";
+        var gmoney = 0;
         $(".set-color").click(function() {
             // alert($(this).data('id'));
             var link = $(this).data('id');
             $("#pic-1").find('img').attr('src',link);
             $(".color").removeClass('not-available');
+            gcolor = $(this).data('mau');
             $(this).addClass('not-available');
         });
         $(".size").click(function(){
             var money = $(this).data('id');
             $('.size').removeClass("bg-secondary text-white");
             $(this).addClass("bg-secondary text-white");
-            $(".price").html("Giá tiền: "+ money);
+            $(".price").html("Giá tiền: "+ money.toLocaleString('en'));
             $(".price").attr('data-id',money);
+            gmemory = $(this).data('memory');
+            gmoney = money;
         });
+        $('.add-to-cart').click(function(){
+            var anhs  =  $("#pic-1").find('img').attr('src');
+            $(".modal-img").attr('src',anhs);
+            $("#modal-color").attr('class','set-color');
+            $('#modal-color').addClass(gcolor);
+            $('#modal-memory').html( gmemory+'G')
+            $('#money').html(gmoney.toLocaleString('en'));
+            $('#id_color').val(gcolor);
+            $('#id_memory').val(gmemory);
+            var id = $('#id-products').val();
+            console.log(id);
+            $('#id_product').val(id);
+        //  alert(anhs);
+        });
+        $(document).ready(function(){
+            gmemory = $('.default-memory').data('memory');
+            gmoney = $('.default-memory').data('id');
+            gcolor = $('.defautl-color').data('mau');
+
+
+        })
+           
     </script>
 @endsection

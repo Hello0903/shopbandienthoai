@@ -63,11 +63,11 @@
                             <div class="limit-box">
                                 <nav class="main-menu">
                                     <ul class="menu-area-main">
-                                        <li class="active"> <a href="http://localhost:8080/shopbandienthoai/">Home</a> </li>
-                                        <li> <a href="about.html">About</a> </li>
-                                        <li><a href="#brand">Brand</a></li>
-                                        <li><a href="#contactus">Contact Us</a></li>
-                                        <li><a href="special.html">Cart<sup style="
+                                        <li class="active"> <a href="http://localhost:8080/shopbandienthoai/">Trang chủ</a> </li>
+                                        <li> <a href="about.html">Thông tin</a> </li>
+                                        <li><a href="#brand">San phẩm</a></li>
+                                        <li><a href="#contactus">Liên hệ</a></li>
+                                        <li><a href="special.html">Giỏ hàng<sup style="
                                                     border: 1px solid red;
                                                     border-radius: 50px;
                                                     background-color: white;
@@ -149,7 +149,7 @@
                 <!-- Modal content-->
                 <div class="modal-content" style="width:60em; margin: 2em auto;">
                   <div class="modal-header">
-                      <h4 class="modal-title" style="color: black">Modal Header</h4>
+                      <h4 class="modal-title" style="color: black">Đặt mua sản phẩm</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     
                   </div>
@@ -157,7 +157,7 @@
                   padding: 20px;
                   height: 30em;
                   overflow-y: scroll;">
-                  <form id="form-buy" action="./bill/create" method="post">
+                  <form id="form-buy" action="http://localhost:8080/shopbandienthoai/bill/create" method="post">
                     @csrf
                    <div class="profile-cus">
                        <h3>Thông tin cơ bản</h3>
@@ -165,18 +165,21 @@
                         <tr><td>Tên khách hàng:</td><td><input name="name" class="form-control" type="text" required></td></tr>
                         <tr><td>Số điện thoại khách hàng:</td><td><input name="phonenumber" class="form-control" type="text" required></td></tr>
                         <tr><td>Địa chỉ khách hàng:</td><td><input name="address" class="form-control" type="text" required></td></tr>
+                        <tr><td>Ghi chú:</td><td><input name="note" class="form-control" type="text" required></td></tr>
                     </table>
                    </div>
                    <div class="profile-product">
                     <h3>Thông tin sản phẩm</h3>
                         <table class="table">
-                            <tr><td style="width:30em"><img class="modal-img"  src="https://padstore.vn/uploads/dong-iphone-nao-chup-anh-dep-nhat_1580889530.jpg" alt="">
+                            <tr><input type="hidden" name="id_product" id="id_product"><td style="width:30em"><img class="modal-img"  src="https://padstore.vn/uploads/dong-iphone-nao-chup-anh-dep-nhat_1580889530.jpg" alt="">
                             </td><td>
-                                <p> Màu sắc: <span class="colors"></span><input type="hidden" name="color" value="0" id="id_color">
+                                <p> Màu sắc: <span class="colors"><span id="modal-color" class="set-color bg-dark not-available"></span></span><input type="hidden" name="color" value="0" id="id_color">
                                     {{-- <span class="set-color bg-white not-available"></span>
                                     <span class="set-color  bg-warning"></span>  --}}
                                   </p>
-                            <p>Dung lượng:  <span class="memorys"></span>  <input type="hidden" name="memory" value="0" id="id_memory">
+                            <p>Dung lượng:  <span class="memorys"><span id="modal-memory" class="memory bg-dark text-white" style="padding: 3px; 
+                                border:1px solid black; border-radius: 2px" data-toggle="tooltip"
+                                 title="xtra large">64G</span></span>  <input type="hidden" name="memory" value="0" id="id_memory">
                              {{-- <span class="memory bg-dark text-white" style="padding: 3px; 
                                 border:1px solid black; border-radius: 2px" data-toggle="tooltip"
                                  title="xtra large">64G</span>
@@ -184,7 +187,7 @@
                                  border:1px solid black; border-radius: 2px" data-toggle="tooltip"
                                  title="xtra large">128G</span> --}}
                             </p>
-                                <h3>Giá tiền: $<span id="money">999</span></h3>
+                                <h3>Giá tiền: <span id="money">999</span></h3>
                                 <p>Bảo hành 12 tháng sau khi mua</p>
                         
                         
@@ -197,7 +200,7 @@
                   </div>
                   <div class="modal-footer"> 
                     <button type="submit" class="btn btn-default btn-buy" >Đặt mua</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
                   </div> 
                 </form>
                 </div>
@@ -223,7 +226,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="titlepage">
-                        <h2 id="contactus">Contact us</h2>
+                        <h2 id="contactus">Liên hệ với chúng tôi</h2>
                     </div>
                     <form class="main_form">
                         <div class="row">
@@ -240,7 +243,7 @@
                                 <textarea class="textarea form-control" placeholder="Message"></textarea>
                             </div>
                             <div class=" col-md-12">
-                                <button class="send">Send</button>
+                                <button class="send">Gửi</button>
                             </div>
                         </div>
                     </form>

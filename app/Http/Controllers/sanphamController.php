@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\sanphamModel;
 use Illuminate\Http\Request;
+use phpDocumentor\Reflection\Location;
 
 class sanphamController extends Controller
 {
@@ -28,7 +29,23 @@ class sanphamController extends Controller
       return json_encode($data);
 
     }
-
+    // insert database
+    public function create_bill(Request $request){
+      $name = $request->name;
+      $phone = $request->phonenumber;
+      $adress = $request->address;
+      $idpro = $request->id_product;
+      $color = $request->color;
+      $memory = $request->memory;
+     $notice =  sanphamModel::create_bill($name,$adress,$phone,$idpro,$color,$memory);
+     if($notice == 0){
+       echo '<script>alert("Lỗi hệ thống xảy ra mong bạn thông cảm")</script>';
+     } 
+     if($notice == 1){
+      echo '<script>alert("Đơn đặt hàng của bạn thành công"); window.location.replace("http://localhost:8080/shopbandienthoai");</script>';
+      
+     }
+    }
 
 
 }

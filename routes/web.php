@@ -1,9 +1,9 @@
 <?php
 
 use App\Http\Controllers\sanphamController;
-// use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
+//use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +21,4 @@ use Illuminate\Http\Request;
 // });
 Route::get('/','sanphamController@getsp');
 Route::get('/product_detail/{id}','sanphamController@product_detail');
-Route::post('/bill/create',function(Request $request){
-        $name = $request->name;
-        echo $name;
-});
+Route::post('/bill/create','sanphamController@create_bill');

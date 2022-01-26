@@ -44,5 +44,35 @@ class sanphamModel extends Model
         return ['product'=>$product,'color'=>$color,'memory'=>$memory];
     }
 
+    public static function create_bill($name,$adress,$phone,$idsp,$id_color,$memory){
+        $hd = DB::table('hoadon')->orderBy('id','desc')->first();
+        $id = 0;
+        if($hd == null)  $id = 0;
+        else {$id = ($hd->id);
+            $id = $id +1;
+        }
+        // echo $id;
+        DB::table('hoadon')->insert([
+               'id' => $id,
+               'idsanpham' => $idsp,
+               'mausp' => $id_color,
+               'dungluong' => $memory,
+               'giatien' => $id,
+               'tenkh' => $name,
+               'diachi' => $adress,
+               'sodienthoai' => $phone, 
+               'ghichu' => 'abc'
+
+
+        ]);
+        // check;
+        $hd = DB::table('hoadon')->orderBy('id','desc')->first();
+        if($id == ($hd->id)){
+            // echo "1";
+            return 1;
+        }
+        else return 0;
+    }
+    
     
 }
